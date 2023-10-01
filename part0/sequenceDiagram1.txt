@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    Note over Browser: Form 'content'
+    Note right of Browser: user clicks the save button
+    Note right of Browser: event handler fetch the data from the page
+    Note right of Browser: prevents the default method to invoke then creates a new note which is then pushed to a list
+    Note right of Browser: rerender the list on the page then sends the note to server as XMLHttpRequest
+    Note over Browser: XMLHttpRequest
+    Note right of Browser: xhttpForPost.open('POST', '/new_note_spa', true)
+    Note right of Browser: xhttpForPost.setRequestHeader('Content-type', 'application/json')
+    Note right of Browser: xhttpForPost.send(JSON.stringify(note))
+    Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Server-->>Browser: 201 Created
